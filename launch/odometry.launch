@@ -1,0 +1,21 @@
+<launch>
+    <!-- Arguments -->
+    <arg name="open_rviz"                               default="true"/>
+    <arg name="run_differential_drive_kinematics_node"  default="true"/>
+    <arg name="run_swivel_steering_mechanism_node"      default="false"/>
+
+    <!-- Rviz -->
+    <group if="$(arg open_rviz)">
+        <node type="rviz" name="rviz" pkg="rviz" args="-d $(find odometry)/rviz/odometry.rviz" />
+    </group>
+
+    <!-- differential_drive_kinematics_node -->
+    <group if="$(arg run_differential_drive_kinematics_node)">
+        <node name="differential_drive_kinematics_node" pkg="odometry" type="differential_drive_kinematics_node" output="screen"/>
+    </group>
+
+    <!-- swivel_steering_mechanism_node -->
+    <group if="$(arg run_swivel_steering_mechanism_node)">
+        <node name="swivel_steering_mechanism_node" pkg="odometry" type="swivel_steering_mechanism_node" output="screen"/>
+    </group>
+</launch>
